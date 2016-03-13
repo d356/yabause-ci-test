@@ -144,6 +144,9 @@ void TitanRenderLinesSimplified(pixel_t * dispbuffer, int start_line, int end_li
 
    for (y = start_line + interlace_line; y < end_line; y += line_increment)
    {
+      if (y & 1)
+         continue;
+
       for (x = 0; x < tt_context.vdp2width; x++)
       {
          int layer_pos = (layer_y * tt_context.vdp2width) + x;
@@ -548,6 +551,9 @@ void TitanRenderLines(pixel_t * dispbuffer, int start_line, int end_line)
          dispbuffer[i] = 0;
 
          dot = TitanDigPixel(layer_pos, y);
+
+         if (y & 1)
+            continue;
 
          if (dot)
          {
